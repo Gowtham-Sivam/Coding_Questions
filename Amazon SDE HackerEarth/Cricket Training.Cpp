@@ -20,7 +20,7 @@ int solve(int arn[], int arm[], int n, int m )
             }
         }
     }
-return count ;
+    return count ;
 }
 
 
@@ -44,7 +44,7 @@ int main(){
             cin >> arm[i];
         }
 
-            cout <<  solve(arn,arm,n,m)<< endl  ;
+        cout <<  solve(arn,arm,n,m)<< endl  ;
 
     }
 }
