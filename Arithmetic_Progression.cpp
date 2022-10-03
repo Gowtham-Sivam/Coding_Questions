@@ -13,34 +13,42 @@ int main() {
         element_index_map[val].push_back(i);
     }
     int vec_ele, diff, diff1;
-
-    cout << element_index_map.size() << endl ;
+    vector<int> ans;
     for (map<int, vector<int>>::iterator it = element_index_map.begin(); it != element_index_map.end(); ++it) {
-        if (it->second.size() == 1)
-            cout << (*it).first << " " << "0" << endl;
-
-        else if (it->second.size() == 2)
-            cout << (*it).first << " " << it->second[1] - it->second[0] << endl ;
-
-        else if (it->second.size() > 2){
-                bool flag = 0;
-                vec_ele = it->second[0];
-                diff = abs(it->second[1] - it->second[0]);
-                for (i =  1 ; i < it -> second.size() ; i++) {
-                   diff1 = abs (vec_ele - it->second[i] )  ;
-                   if (diff == diff1){
-                       flag = 1 ;
-                   }else{
-                       flag = 0 ;
-                   }
-                   vec_ele = it->second[i] ;
+        if (it->second.size() == 1) {
+            ans.push_back((*it).first);
+            ans.push_back(0);
+        } else if (it->second.size() == 2) {
+            ans.push_back((*it).first);
+            ans.push_back(abs(it->second[1] - it->second[0]));
+        } else if (it->second.size() > 2) {
+            bool flag = 0;
+            vec_ele = it->second[0];
+            diff = abs(it->second[1] - it->second[0]);
+            for (i = 1; i < it->second.size(); i++) {
+                diff1 = abs(vec_ele - it->second[i]);
+                if (diff == diff1) {
+                    flag = 1;
+                } else {
+                    flag = 0;
+                    break;
                 }
-                if (flag){
-                    cout << (*it).first << " " << diff1 << endl  ;
-                 }
+                vec_ele = it->second[i];
             }
+            if (flag) {
+                ans.push_back((*it).first);
+                ans.push_back(diff);
+            }
+        }
 
-
+    }
+    cout << ans.size() / 2  << endl ;
+    auto it = ans.begin();
+    while(it != ans.end()){
+        cout << (*it) << " " ;
+        it++ ;
+        cout << (*it) << endl ;
+        it++ ;
     }
 
     return 0;
