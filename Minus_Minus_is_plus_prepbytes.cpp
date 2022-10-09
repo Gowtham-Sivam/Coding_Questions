@@ -1,28 +1,45 @@
-#include<iostream>
-using namespace std ;
+#include <bits/stdc++.h>
+using namespace std;
 
-void copy(string *s){
-    
-}
-int main(){
-    int t ;
-    cin >> t ;
-    while(t--){
-        string  s,t ;
-        cin >> s ; cin >> t ;
-        int i = 0 ,j = 0 ;
-        bool flag = 0 ;
-        int max_len = max(s.size(), t.size()) ;
-        while(i < max_len){
-            if (s[i] == t[i]){
-                i++ ;
-            }else{
-                if ((s[i] == s[i+1]) && (s[i] =='-')){
-                    s[i] = '+' ;
-                    copy(&s);
+int main()
+{
+    int test;
+    cin>>test;
+
+    while(test--){
+
+        string s,t;
+        cin>>s>>t;
+
+        int diff = 0;
+        bool flag = false;
+
+        if((s.length()==0 && t.length()==0) || (s.length() < t.length()))
+            flag = false;
+        else{
+            for(int i=0; (i-diff)<t.length(); i++){
+                if(t[i-diff] == '+' && s[i] == '-' && s[i+1] == '-'){
+                    i++;
+                    diff++;
+
+                }else if((t[i-diff] == '+' && s[i] == '+') || (t[i-diff] == '-' && s[i] == '-') ){
+                    flag = false;
+                }
+                else{
+                    flag = true;
+                    break;
                 }
             }
         }
+
+        if((s.length()-diff) != t.length()){
+            flag = true;
+        }
+
+        if(flag)
+            cout<<"NO"<<endl;
+        else
+            cout<<"YES"<<endl;
+
     }
-    return  0;
 }
